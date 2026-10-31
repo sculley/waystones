@@ -46,23 +46,11 @@ There's a 3-second recharge between trips.
 
 ## 🛠️ Recipes
 
-All crafted on a crafting table. Everything is also in the creative inventory.
+All crafted on a crafting table. Everything is also in the creative inventory, and the recipes are in the Waystones Guide in-game.
 
-**Waystone**
-| | | |
-|:-:|:-:|:-:|
-| Stone Bricks | Amethyst Shard | Stone Bricks |
-| Stone Bricks | Ender Pearl | Stone Bricks |
-| Obsidian | Obsidian | Obsidian |
-
-**Wayfinder**
-| | | |
-|:-:|:-:|:-:|
-| | Amethyst Shard | |
-| Ender Pearl | Compass | Ender Pearl |
-| | Amethyst Shard | |
-
-**Waystones Guide** — Book + Amethyst Shard, any arrangement.
+<p align="center">
+  <img src="docs/images/recipes.png" alt="Recipes. Waystone: stone bricks, amethyst shard, stone bricks / stone bricks, ender pearl, stone bricks / three obsidian. Wayfinder: amethyst shard above and below a compass, with an ender pearl either side. Waystones Guide: book and amethyst shard in any arrangement." width="100%">
+</p>
 
 ## 📦 Installing
 
@@ -99,6 +87,7 @@ Waystones_BP/              behaviour pack
   scripts/ui.js            menus
   scripts/guide.js         the guide book and first-join gift
 Waystones_RP/              resource pack — textures, names, icon
+  font/glyph_E5.png        recipe icons used as text glyphs in the guide
 tools/                     build script and artwork generators
 docs/images/               README artwork
 ```
@@ -116,7 +105,7 @@ python tools/build.py 1.2.0    # stamp a specific version into the package
 
 ```bash
 python tools/make_textures.py                         # pack textures and icons
-cd tools && python render_docs.py && python render_concepts.py   # README images
+cd tools && python render_docs.py && python render_recipes.py && python render_concepts.py   # README images + guide glyphs
 ```
 
 **Release** — push a version tag and GitHub Actions validates the packs, builds the `.mcaddon` and `.mcpack` files, and attaches them to a new release:

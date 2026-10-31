@@ -18,7 +18,7 @@ export function travel(player, target) {
   effects(player.dimension, player.location);
 
   // teleport() loads the destination chunk, so distance and dimension don't matter.
-  player.addEffect("slow_falling", 60, { showParticles: false });
+  player.addEffect("slow_falling", 10, { showParticles: false });
   player.teleport(
     { x: ws.x + 0.5, y: ws.y + 1, z: ws.z + 0.5 },
     { dimension: world.getDimension(ws.dim), rotation: origin.rotation, keepVelocity: false }

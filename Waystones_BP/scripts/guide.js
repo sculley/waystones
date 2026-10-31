@@ -5,6 +5,18 @@ import { ActionFormData } from "@minecraft/server-ui";
 export const GUIDE = "wst:guide";
 const GIVEN = "wst:guide_received";
 
+// Recipe icons are font glyphs from Waystones_RP/font/glyph_E5.png (drawn by tools/render_recipes.py):
+// character U+E5xx shows cell xx of that sheet, so recipes can be drawn as icon grids in plain text.
+const glyph = (cell) => String.fromCodePoint(0xe500 + cell);
+const [_, S, A, E, O, C, B, WAYSTONE_ICON, WAYFINDER_ICON, GUIDE_ICON, ARROW, PLUS] = Array.from({ length: 12 }, (__, i) =>
+  glyph(i)
+);
+
+/** A 3×3 crafting grid with an arrow and the result beside the middle row. */
+function recipe(rows, result) {
+  return rows.map((row, i) => row.join("") + (i === 1 ? `  ${ARROW} ${result}` : "")).join("\n");
+}
+
 const CHAPTERS = [
   {
     title: "Getting started",
@@ -35,9 +47,15 @@ const CHAPTERS = [
   {
     title: "Recipes",
     text:
-      "§5Waystone§r (crafting table)\n Stone Bricks · Amethyst Shard · Stone Bricks\n Stone Bricks · Ender Pearl · Stone Bricks\n Obsidian · Obsidian · Obsidian\n\n" +
-      "§5Wayfinder§r (crafting table)\n  —  · Amethyst Shard ·  — \n Ender Pearl · Compass · Ender Pearl\n  —  · Amethyst Shard ·  — \n\n" +
-      "§5Waystones Guide§r\n Book + Amethyst Shard (any shape)",
+      "§5Waystone§r (crafting table)\n" +
+      recipe([[S, A, S], [S, E, S], [O, O, O]], WAYSTONE_ICON) +
+      "\n§7Stone Bricks, Amethyst Shard, Ender Pearl, Obsidian§r\n\n" +
+      "§5Wayfinder§r (crafting table)\n" +
+      recipe([[_, A, _], [E, C, E], [_, A, _]], WAYFINDER_ICON) +
+      "\n§7Amethyst Shard, Ender Pearl, Compass§r\n\n" +
+      "§5Waystones Guide§r (crafting table)\n" +
+      `${B} ${PLUS} ${A}  ${ARROW} ${GUIDE_ICON}` +
+      "\n§7Book + Amethyst Shard, any arrangement§r",
   },
 ];
 
