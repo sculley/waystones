@@ -1,0 +1,58 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Waystones",
+    "description": "Place waystones, link them, and travel anywhere across the Overworld, Nether and End.",
+    "uuid": "7f8a8e48-56d2-440a-842c-d85892b3965e",
+    "version": [
+      1,
+      1,
+      1
+    ],
+    "min_engine_version": [
+      1,
+      21,
+      90
+    ]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "d6826072-5f2c-4486-96a3-064ae016dc82",
+      "version": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "uuid": "bba8af75-2cf6-4ff6-935f-3ea925cc5309",
+      "version": [
+        1,
+        1,
+        1
+      ],
+      "entry": "scripts/main.js"
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "095157d7-8c90-401f-907f-71b17406ea8f",
+      "version": [
+        1,
+        1,
+        1
+      ]
+    },
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.0.0"
+    },
+    {
+      "module_name": "@minecraft/server-ui",
+      "version": "2.0.0"
+    }
+  ]
+}

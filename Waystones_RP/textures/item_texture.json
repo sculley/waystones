@@ -1,0 +1,12 @@
+{
+  "resource_pack_name": "waystones",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "wst_wayfinder": {
+      "textures": "textures/items/wst_wayfinder"
+    },
+    "wst_guide": {
+      "textures": "textures/items/wst_guide"
+    }
+  }
+}

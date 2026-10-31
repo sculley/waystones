@@ -1,0 +1,15 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:item": {
+    "description": {
+      "identifier": "wst:guide",
+      "menu_category": { "category": "items" }
+    },
+    "components": {
+      "wst:guide": {},
+      "minecraft:icon": "wst_guide",
+      "minecraft:display_name": { "value": "item.wst:guide.name" },
+      "minecraft:max_stack_size": 1
+    }
+  }
+}

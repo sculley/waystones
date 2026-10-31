@@ -1,0 +1,13 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:recipe_shapeless": {
+    "description": { "identifier": "wst:guide" },
+    "tags": ["crafting_table"],
+    "ingredients": [
+      { "item": "minecraft:book" },
+      { "item": "minecraft:amethyst_shard" }
+    ],
+    "unlock": [{ "item": "minecraft:book" }],
+    "result": { "item": "wst:guide", "count": 1 }
+  }
+}

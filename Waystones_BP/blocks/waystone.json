@@ -1,0 +1,23 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:block": {
+    "description": {
+      "identifier": "wst:waystone",
+      "menu_category": { "category": "items" }
+    },
+    "components": {
+      "wst:waystone": {},
+      "minecraft:display_name": "tile.wst:waystone.name",
+      "minecraft:geometry": "minecraft:geometry.full_block",
+      "minecraft:material_instances": {
+        "*": { "texture": "wst_waystone_side", "render_method": "opaque" },
+        "up": { "texture": "wst_waystone_top", "render_method": "opaque" },
+        "down": { "texture": "wst_waystone_bottom", "render_method": "opaque" }
+      },
+      "minecraft:destructible_by_mining": { "seconds_to_destroy": 3 },
+      "minecraft:destructible_by_explosion": { "explosion_resistance": 1200 },
+      "minecraft:light_emission": 7,
+      "minecraft:map_color": "#8a5cc7"
+    }
+  }
+}

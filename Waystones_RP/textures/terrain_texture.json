@@ -1,0 +1,11 @@
+{
+  "resource_pack_name": "waystones",
+  "texture_name": "atlas.terrain",
+  "padding": 8,
+  "num_mip_levels": 4,
+  "texture_data": {
+    "wst_waystone_side": { "textures": "textures/blocks/wst_waystone_side" },
+    "wst_waystone_top": { "textures": "textures/blocks/wst_waystone_top" },
+    "wst_waystone_bottom": { "textures": "textures/blocks/wst_waystone_bottom" }
+  }
+}

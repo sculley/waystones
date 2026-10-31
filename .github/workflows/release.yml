@@ -1,0 +1,57 @@
+name: Build & Release
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Work out version
+        id: version
+        run: |
+          if [[ "$GITHUB_REF" == refs/tags/v* ]]; then
+            echo "value=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
+          else
+            echo "value=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Validate and package
+        run: python tools/build.py ${{ steps.version.outputs.value }}
+
+      - name: Upload build
+        uses: actions/upload-artifact@v4
+        with:
+          name: waystones-${{ steps.version.outputs.value || github.sha }}
+          path: dist/*
+
+      - name: Publish release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          name: Waystones ${{ github.ref_name }}
+          files: dist/*
+          generate_release_notes: true
+          body: |
+            ### Install
+            - **Windows / mobile:** download `Waystones-${{ steps.version.outputs.value }}.mcaddon` and open it.
+            - **PS5 / Xbox / Switch:** import on a phone or PC, then upload the world to a Realm (see the README).
+
+            The `.mcpack` files are the behaviour and resource packs on their own, if you prefer to install them separately.

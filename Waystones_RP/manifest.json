@@ -1,0 +1,29 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "Waystones Resources",
+    "description": "Textures and names for the Waystones add-on.",
+    "uuid": "095157d7-8c90-401f-907f-71b17406ea8f",
+    "version": [
+      1,
+      1,
+      1
+    ],
+    "min_engine_version": [
+      1,
+      21,
+      90
+    ]
+  },
+  "modules": [
+    {
+      "type": "resources",
+      "uuid": "22cf1742-84be-424d-855a-26853b1e9235",
+      "version": [
+        1,
+        1,
+        1
+      ]
+    }
+  ]
+}
