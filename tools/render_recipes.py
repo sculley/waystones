@@ -242,19 +242,31 @@ def readme_image():
 
 
 # ---------- glyph sheet ----------
-CELL = 48  # 16 x 48 = 768 px sheet
+# Bedrock draws glyph pixels at roughly the scale of its 8 px text font, so cells stay at
+# 16 px: each icon is about two lines tall, and the guide leaves a blank line between rows.
+CELL = 16  # 16 x 16 = 256 px sheet
 GLYPHS = ["slot", S, A, E, O, C, B, "waystone", "wayfinder", "guide", "arrow", "plus"]
+
+
+def glyph_slot(name):
+    """A 16 px slot: background, the icon at its native size, then a 1 px bevelled border on top."""
+    g = Image.new("RGBA", (CELL, CELL), SLOT_IN + (255,))
+    if name == "waystone":
+        g.alpha_composite(Image.open(os.path.join(iso.RP, "wst_waystone_side.png")).convert("RGBA"))
+    elif name:
+        g.alpha_composite(PIXEL_ICONS[name])
+    d = ImageDraw.Draw(g)
+    d.line([(0, 0), (CELL - 1, 0)], fill=SLOT_DARK)
+    d.line([(0, 0), (0, CELL - 1)], fill=SLOT_DARK)
+    d.line([(0, CELL - 1), (CELL - 1, CELL - 1)], fill=SLOT_LIGHT)
+    d.line([(CELL - 1, 0), (CELL - 1, CELL - 1)], fill=SLOT_LIGHT)
+    return g
 
 
 def glyph_sheet():
     sheet = Image.new("RGBA", (16 * CELL, 16 * CELL), (0, 0, 0, 0))
     for i, name in enumerate(GLYPHS):
-        if name == "arrow":
-            g = arrow().resize((CELL, CELL), Image.NEAREST)
-        elif name == "plus":
-            g = plus().resize((CELL, CELL), Image.NEAREST)
-        else:
-            g = slot_with(None if name == "slot" else name, CELL, 3, 36)
+        g = arrow() if name == "arrow" else plus() if name == "plus" else glyph_slot(None if name == "slot" else name)
         sheet.alpha_composite(g, ((i % 16) * CELL, (i // 16) * CELL))
     out = os.path.join(ROOT, "Waystones_RP", "font")
     os.makedirs(out, exist_ok=True)

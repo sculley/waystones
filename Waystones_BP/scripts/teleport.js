@@ -42,12 +42,40 @@ function verifyArrival(player, ws, origin, attempt) {
       store.remove(ws.id);
       return sendBack(player, origin, `§c${ws.name} was destroyed, so it has been removed.`);
     }
-    const blocked = [block.above(1), block.above(2)].some((b) => b && !b.isAir && !b.isLiquid);
-    if (blocked) return sendBack(player, origin, `§c${ws.name} is blocked — clear the two blocks above it.`);
+    if (!isClear(block.above(1)) || !isClear(block.above(2))) {
+      // Something got on top anyway (snow, falling sand, an enderman): land beside it instead.
+      const spot = besideWaystone(block);
+      if (!spot) return sendBack(player, origin, `§c${ws.name} is blocked — clear the two blocks above it.`);
+      player.teleport(spot, { dimension: block.dimension, rotation: origin.rotation, keepVelocity: false });
+      effects(block.dimension, spot);
+      return player.sendMessage(`§e${ws.name} is blocked, so you've arrived next to it. Clear the two blocks above it.`);
+    }
 
     effects(block.dimension, player.location);
     player.onScreenDisplay.setActionBar(`§dArrived at §f${ws.name}`);
   }, 2);
+}
+
+/** Space a player can stand in on top of a waystone. */
+const isClear = (b) => !b || b.isAir || b.isLiquid;
+
+/** Nearest spot around the waystone with two air blocks over solid ground, or undefined. */
+function besideWaystone(block) {
+  const around = [[0, 1], [1, 0], [0, -1], [-1, 0], [1, 1], [1, -1], [-1, 1], [-1, -1]];
+  for (const dy of [0, 1, -1]) {
+    for (const [dx, dz] of around) {
+      const { x, y, z } = block.location;
+      const at = { x: x + dx, y: y + dy, z: z + dz };
+      try {
+        const feet = block.dimension.getBlock(at);
+        const head = feet?.above(1);
+        const ground = feet?.below(1);
+        if (feet?.isAir && head?.isAir && ground && !ground.isAir && !ground.isLiquid) {
+          return { x: at.x + 0.5, y: at.y, z: at.z + 0.5 };
+        }
+      } catch {}
+    }
+  }
 }
 
 function sendBack(player, origin, message) {

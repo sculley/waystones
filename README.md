@@ -27,7 +27,7 @@ Grab **`Waystones-x.y.z.mcaddon`** from the [latest release](https://github.com/
 - **Link one-to-one or one-to-many** — a waystone with a single link works like a portal pair; one with several links shows a destination list. Links are two-way.
 - **Wayfinder** — use it anywhere to travel to any waystone you can access, nearest first.
 - **Any distance, any dimension** — Overworld ↔ Nether ↔ End, no range limit.
-- **Safe arrivals** — if a destination was destroyed or is blocked, you're returned to where you started.
+- **Safe arrivals** — blocks can't be placed in the two spaces above a waystone. If something still ends up there (snow, falling sand), you arrive next to it; if the waystone was destroyed, you're returned to where you started.
 - **Waystones Guide** — every player gets one on first join; it explains everything in-game.
 - **Blast-proof** — waystones are as explosion-resistant as obsidian.
 
